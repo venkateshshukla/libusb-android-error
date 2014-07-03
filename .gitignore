@@ -18,3 +18,9 @@ local.properties
 # Jni generated files
 /libs
 /obj
+
+# Crossbuild files
+crossbuild/ndk-*
+crossbuild/*.tar.gz
+crossbuild/libusb-*
+!crossbuild/libusb-1.0.9-android.patch
