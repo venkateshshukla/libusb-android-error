@@ -1,0 +1,20 @@
+# Generated Files
+/bin
+/gen
+*.class
+build.xml
+local.properties
+
+# Backups
+*~
+*.swp
+
+# Package Files
+*.jar
+*.war
+*.ear
+/lib
+
+# Jni generated files
+/libs
+/obj
