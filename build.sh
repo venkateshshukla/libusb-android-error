@@ -57,7 +57,7 @@ fi
 
 popd # From crossbuild
 
-ndk-build -B V=1
+$ANDROID_NDK/ndk-build -B V=1
 ant debug install
 adb shell am start -n org.venky/.Home
 adb logcat -v threadtime | grep `adb shell ps | grep org.venky | cut -c 11-14`
