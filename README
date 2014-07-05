@@ -1,0 +1,67 @@
+Purpose
+-------
+
+This project illustrates the problem faced when using libusb on Android. There
+is permission issue for usage of USB on android. Besides static permission in
+the Manifest, android requires the application to ask permission for usage of
+USB device at runtime.
+
+The error that is seen is:
+I stderr  : libusb: 0.000000 error [op_open] libusb couldn't open USB device /dev/bus/usb/001/002: Permission denied.
+I stderr  : libusb: 0.000055 error [op_open] libusb requires write access to USB device nodes.
+
+I have experimented on getting USB permission on runtime and then trying to
+access USB device from the native side using this application. But the error
+remains. I have conlcuded that the only way to access USB devices on android is
+via the java USB API provided by android.
+
+Dependencies
+------------
+You must have all basic stuff needed for android development. I am listing it
+down in case someone needs it.
+
+1. Android SDK
+2. Android NDK
+3. ant
+
+Besides the above, it is really necessary that adb and ant are on the PATH. This
+can be verified by running the following commands in terminal. The output should
+be similar to what is shown.
+
+$ adb version
+Android Debug Bridge version 1.0.31
+
+$ ant -version
+Apache Ant(TM) version 1.9.2 compiled on September 12 2013
+
+How to run
+-----------
+
+Change the res/xml/device_filter.xml and jni/open_device.c to include the VID
+and PID of the  chipset.
+By default it contains VID of FTDI device
+
+To run, make appropriate changes in the build.sh file to give the proper path of
+Android SDK and NDK.
+Run the following command in the terminal.
+a. For x86 devices or emulators
+   $ bash build.sh x86
+b. For arm devices or emulators
+   $ bash build.sh arm
+
+The script will automatically download required data and set it up. It will then
+build the android application and install it in the attached android device or
+emulator. It will then begin the application and show you the logs.
+
+Procedure
+---------
+Once the application starts running, the background will turn to red. This means
+some error had occurred. It hasn't found a USB device.
+
+Now, connect the USB device to your android. It will now ask for permission to
+use with this application. On giving the permission, the activity will refresh
+and the background will change to red or green according to the opening of USB
+device succeeds or fails.
+( It will change to RED every time as it is possible to open usb device only
+  through java based android USB API. )
+
